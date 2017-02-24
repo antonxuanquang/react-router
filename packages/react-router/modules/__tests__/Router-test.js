@@ -3,6 +3,8 @@ import React from 'react'
 import Router from '../Router'
 import ReactDOM from 'react-dom'
 
+const fakeHistory = { listen: () => () => {} }
+
 describe('A <Router>', () => {
   const node = document.createElement('div')
 
@@ -14,7 +16,7 @@ describe('A <Router>', () => {
     it('throws an error explaining a Router can only have one child', () => {
       expect(() => {
         ReactDOM.render(
-          <Router history={{}}>
+          <Router history={fakeHistory}>
             <p>Foo</p>
             <p>Bar</p>
           </Router>,
@@ -28,7 +30,7 @@ describe('A <Router>', () => {
     it('does not throw an error', () => {
       expect(() => {
         ReactDOM.render(
-          <Router history={{}}>
+          <Router history={fakeHistory}>
             <p>Bar</p>
           </Router>,
           node
@@ -41,7 +43,7 @@ describe('A <Router>', () => {
     it('does not throw an error', () => {
       expect(() => {
         ReactDOM.render(
-          <Router history={{}} />,
+          <Router history={fakeHistory} />,
           node
         )
       }).toNotThrow()
